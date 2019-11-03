@@ -11,17 +11,15 @@ auto_scaling_group_response = asg_client.describe_auto_scaling_groups(
         autoscaling_group_name,
     ],
 )
-count = -1
 
 # iterate for each instance in the autoscaling group
 for i in auto_scaling_group_response['AutoScalingGroups'][0]['Instances']:
-    count = count +1
     print("Destroying instance %s\n" % i['InstanceId'])
 
     # destroying instance in autoscaling group
     # the destruction forces the replacement of the instance
     scaling_activity_response = asg_client.terminate_instance_in_auto_scaling_group(
-        InstanceId=auto_scaling_group_response['AutoScalingGroups'][0]['Instances'][count]['InstanceId'],
+        InstanceId=i['InstanceId'],
         ShouldDecrementDesiredCapacity=False
     )
 
