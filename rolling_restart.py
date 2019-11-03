@@ -1,5 +1,6 @@
 import boto3
 import sys
+import time
 
 kinesis_client = boto3.client('autoscaling')
 autoscaling_group_name = sys.argv[1]
@@ -38,4 +39,4 @@ for i in auto_scaling_group_response['AutoScalingGroups']['Instances']:
             sys.exit(1)
         else:
             print("Creation of instance in %s status, waiting 10 seconds\n", scaling_activity_status_response['Activities'][0]["StatusCode"])
-            sleep(10)
+            time.sleep(10)
