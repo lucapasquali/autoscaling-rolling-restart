@@ -16,7 +16,7 @@ auto_scaling_group_response = client.describe_auto_scaling_groups(
 for i in auto_scaling_group_response['AutoScalingGroups']['Instances']:
     printf("Destroying instance %s\n", auto_scaling_group_response['AutoScalingGroups']['Instances'][i]['InstanceId'])
 
-    # destroying instance in autoscaling group 
+    # destroying instance in autoscaling group
     # the destruction forces the replacement of the instance
     scaling_activity_response = client.terminate_instance_in_auto_scaling_group(
         InstanceId=auto_scaling_group_response['AutoScalingGroups']['Instances'][i]['InstanceId'],
@@ -25,11 +25,11 @@ for i in auto_scaling_group_response['AutoScalingGroups']['Instances']:
 
     # Checking the status of the auto scaling activity
     while true:
-        scaling_activity_status_response = client..describe_scaling_activities(
+        scaling_activity_status_response = client.describe_scaling_activities(
             ActivityIds=[
                 scaling_activity_response['Activity']['ActivityId'],
             ],
-            AutoScalingGroupName='string',
+            AutoScalingGroupName=autoscaling_group_name,
             )
         if scaling_activity_status_response['Activities'][0]["StatusCode"] == 'Successful':
             print("Creation of Instance successful, proceeding with the next one\n")
