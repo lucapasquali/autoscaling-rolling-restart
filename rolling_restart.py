@@ -39,4 +39,4 @@ for i in auto_scaling_group_response['AutoScalingGroups']['Instances']:
             sys.exit(1)
         else:
             print("Creation of instance in %s status, waiting 10 seconds\n", scaling_activity_status_response['Activities'][0]["StatusCode"])
-            sleep 10
+            sleep(10)
