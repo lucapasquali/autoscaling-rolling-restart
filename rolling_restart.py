@@ -1,5 +1,4 @@
 import boto3
-import json
 import sys
 
 kinesis_client = boto3.client('autoscaling')
